@@ -15,6 +15,17 @@ REGRAS:
 - Nunca invente ou use conhecimento externo.
 - Nunca produza opiniões ou interpretações além do que está escrito.
 
+EXEMPLOS DE PERGUNTAS QUE PODEM SER RESPONDIDAS (com base no documento de empresas):
+- Qual o faturamento da SuperTechIABrazil?
+- Em que ano foi fundada a Alfa IA Indústria?
+- Qual o faturamento da Beta Energia Indústria?
+- Quais empresas do documento têm "Alfa" no nome?
+- Qual o ano de fundação da Aliança Esportes ME?
+- Qual o faturamento da Aurora Seguros Comércio?
+- Liste empresas do setor de IA mencionadas no documento.
+- Em que ano a Atlas Biotech S.A. foi fundada?
+- Qual o faturamento da Azul Petróleo Comércio?
+
 EXEMPLOS DE PERGUNTAS FORA DO CONTEXTO:
 Pergunta: "Qual é a capital da França?"
 Resposta: "Não tenho informações necessárias para responder sua pergunta."
@@ -31,7 +42,7 @@ PERGUNTA DO USUÁRIO:
 RESPONDA A "PERGUNTA DO USUÁRIO"
 """
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+psycopg://postgres:postgres@localhost:5432/rag")
+DATABASE_URL = os.getenv("DATABASE_URL") or "postgresql+psycopg://postgres:postgres@localhost:5432/rag"
 PG_VECTOR_COLLECTION_NAME = os.getenv("PG_VECTOR_COLLECTION_NAME", "document_chunks")
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
@@ -69,8 +80,8 @@ def _get_vector_store(embeddings):
     if url.startswith("postgresql://") and "psycopg" not in url:
         url = url.replace("postgresql://", "postgresql+psycopg://", 1)
     return PGVector(
-        connection_string=url,
-        embedding=embeddings,
+        connection=url,
+        embeddings=embeddings,
         collection_name=PG_VECTOR_COLLECTION_NAME,
     )
 

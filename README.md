@@ -80,6 +80,10 @@ PERGUNTA: Quantos clientes temos em 2024?
 RESPOSTA: Não tenho informações necessárias para responder sua pergunta.
 ```
 
+## Sobre os exemplos no prompt
+
+No `search.py`, o prompt enviado à LLM inclui **exemplos de perguntas que podem ser respondidas** com base no documento (ex.: faturamento da SuperTechIABrazil, ano de fundação da Alfa IA Indústria) e exemplos de perguntas **fora do contexto**. Esses exemplos foram adicionados porque, nos testes, o modelo tendia a se recusar a responder todas as perguntas, inclusive as que tinham resposta explícita no contexto do PDF. Com os exemplos no prompt, o modelo passa a distinguir melhor entre perguntas válidas sobre o documento e perguntas que devem receber *"Não tenho informações necessárias para responder sua pergunta."*
+
 ## Tecnologias
 
 - **Linguagem:** Python  
